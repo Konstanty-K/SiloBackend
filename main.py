@@ -31,18 +31,20 @@ class TokenResponse(BaseModel):
     expires_at: datetime
 
 
+# --- MODELE DANYCH (Dodano pole timestamp) ---
+
 class SiloStatus(BaseModel):
     id: str
     name: str
     average_temp: float
     matrix_data: List[List[Optional[float]]]
 
-
 class McuStatus(BaseModel):
     id: str
     name: str
     ext_temp: float
     ext_hum: int
+    timestamp: int # <-- NOWOŚĆ: Znacznik czasu UNIX w milisekundach przesyłany ze sprzętu
     silos: List[SiloStatus]
 
 
@@ -69,26 +71,23 @@ def login(request: LoginRequest):
         raise HTTPException(status_code=401, detail="Nieprawidłowy identyfikator")
 
 
-# NOWOŚĆ: Endpoint dla aplikacji Android (Pobieranie stanu)
+# --- ENDPOINTY ---
+
 @app.get("/api/v1/mcus", response_model=List[McuStatus])
 def get_all_mcus():
-    print(f"DEBUG: Telefon pobiera listę urządzeń. Ilość w bazie: {len(db_mcus)}")
+    """Zwraca całą zebraną historię pomiarów dla Androida."""
+    print(f"DEBUG: Telefon pobiera całą historię. Ilość punktów w bazie: {len(db_mcus)}")
     return db_mcus
 
 
-# NOWOŚĆ: Endpoint dla fizycznych maszyn / Postmana (Wysyłanie pomiarów)
 @app.post("/api/v1/mcus")
 def update_mcu_status(mcu: McuStatus):
-    print(f"DEBUG: Odebrano nowe dane od urządzenia: {mcu.id}")
-    # Szukamy czy MCU już istnieje w bazie
-    for i, existing_mcu in enumerate(db_mcus):
-        if existing_mcu.id == mcu.id:
-            db_mcus[i] = mcu  # Aktualizacja
-            return {"status": "success", "message": "Zaktualizowano MCU"}
+    """Sprzęt lub Postman wysyła nowy punkt pomiarowy."""
+    print(f"DEBUG: Odebrano pomiar od urządzenia: {mcu.id} z czasu: {mcu.timestamp}")
 
-    # Jeśli nie ma, dodajemy nowe
+    # KROK ARCHITEKTONICZNY: Zamiast nadpisywać, dopisujemy nowy rekord do serii czasowej!
     db_mcus.append(mcu)
-    return {"status": "success", "message": "Dodano nowe MCU"}
+    return {"status": "success", "message": f"Zapisano punkt historyczny dla {mcu.id}"}
 
 # --- START SERWERA ---
 # Aby uruchomić, wpisz w terminalu:
