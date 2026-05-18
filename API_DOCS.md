@@ -1,7 +1,3 @@
-Dokumentacja REST APIOto profesjonalnie sformatowany plik .md, który podsumowuje strukturę Twojego Pythona. Skopiuj ten blok i zapisz jako API_DOCS.md w swoim repozytorium.Markdown# SiloMonitor - REST API Documentation
-
-Ten dokument opisuje strukturę i kontrakty danych dla komunikacji z serwerem bazowym (Python/FastAPI) wykorzystywanym w aplikacji SiloMonitor. Architektura opiera się na transferze danych telemetrycznych w formacie JSON.
-
 ## Architektura Danych
 
 System opiera się na hierarchicznej strukturze urządzeń:
