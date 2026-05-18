@@ -91,3 +91,8 @@ def update_mcu_status(mcu: McuStatus):
     print(f"DEBUG: Odebrano pomiar od {mcu.id} (Lokalizacja: {mcu.location_id}) z czasu: {mcu.timestamp}")
     db_mcus.append(mcu)
     return {"status": "success", "message": f"Zapisano punkt historyczny dla {mcu.id}"}
+
+
+# --- START SERWERA ---
+# Aby uruchomić, wpisz w terminalu:
+# uvicorn main:app --reload --host 0.0.0.0 --port 8000
