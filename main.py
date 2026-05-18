@@ -93,6 +93,43 @@ def update_mcu_status(mcu: McuStatus):
     return {"status": "success", "message": f"Zapisano punkt historyczny dla {mcu.id}"}
 
 
+import time
+
+
+@app.on_event("startup")
+def seed_historical_data():
+    """Automatycznie wstrzykuje 5 godzin historii przy starcie serwera, żeby PROD nie był pusty."""
+    if not db_mcus:
+        # Aktualny czas w milisekundach
+        now_ms = int(time.time() * 1000)
+
+        # Generujemy 5 paczek cofając się o godzinę (3600000 ms) w przeszłość
+        for i in range(5, 0, -1):
+            historical_time = now_ms - (i * 3600000)
+
+            # Temperatura rośnie z czasem, żebyśmy widzieli różnicę na matrycy
+            base_temp = 15.0 + (5 - i)
+
+            db_mcus.append(McuStatus(
+                id="MCU_PROD_123",
+                location_id="LOC_001",  # Poznań
+                ext_temp=20.0 + (5 - i),
+                ext_hum=50,
+                timestamp=historical_time,
+                silos=[
+                    SiloStatus(
+                        id="S_01",
+                        average_temp=base_temp,
+                        matrix_data=[
+                            [base_temp, base_temp + 1],
+                            [base_temp - 1, base_temp]
+                        ]
+                    )
+                ]
+            ))
+        print("DEBUG: Zasilano RAM 5-godzinną historią startową dla PROD!")
+
+
 # --- START SERWERA ---
 # Aby uruchomić, wpisz w terminalu:
 # uvicorn main:app --reload --host 0.0.0.0 --port 8000

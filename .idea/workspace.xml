@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bf17e2b-cc87-47fd-bb4d-127f5ddd3c27" name="Changes" comment="-names&#10;+ id&#10;Get mcu(location)">
+    <list default="true" id="5bf17e2b-cc87-47fd-bb4d-127f5ddd3c27" name="Changes" comment="launch instructions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +108,7 @@
       <workItem from="1779020395362" duration="6672000" />
       <workItem from="1779039903821" duration="1410000" />
       <workItem from="1779113904592" duration="1341000" />
-      <workItem from="1779132375368" duration="1120000" />
+      <workItem from="1779132375368" duration="2790000" />
     </task>
     <task id="LOCAL-00001" summary="setup">
       <option name="closed" value="true" />
@@ -150,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779115569390</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="launch instructions">
+      <option name="closed" value="true" />
+      <created>1779134137751</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1779134137751</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,7 +179,8 @@
     <MESSAGE value="setup" />
     <MESSAGE value="+timestampy&#10;+endpoints update" />
     <MESSAGE value="-names&#10;+ id&#10;Get mcu(location)" />
-    <option name="LAST_COMMIT_MESSAGE" value="-names&#10;+ id&#10;Get mcu(location)" />
+    <MESSAGE value="launch instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="launch instructions" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SiloBackend$SiloBackend.coverage" NAME="SiloBackend Coverage Results" MODIFIED="1779024923986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
