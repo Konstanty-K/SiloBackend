@@ -1,4 +1,4 @@
-# SiloMonitor - REST API Documentation
+Dokumentacja REST APIOto profesjonalnie sformatowany plik .md, który podsumowuje strukturę Twojego Pythona. Skopiuj ten blok i zapisz jako API_DOCS.md w swoim repozytorium.Markdown# SiloMonitor - REST API Documentation
 
 Ten dokument opisuje strukturę i kontrakty danych dla komunikacji z serwerem bazowym (Python/FastAPI) wykorzystywanym w aplikacji SiloMonitor. Architektura opiera się na transferze danych telemetrycznych w formacie JSON.
 
@@ -45,3 +45,8 @@ Endpoint służy do synchronizacji aplikacji mobilnej z bazą danych na serwerze
     ]
   }
 ]
+Struktura JSON (Schemat Typów)PoleTypOpisidStringUnikalny identyfikator mikrokontrolera (Klucz główny).location_idStringIdentyfikator logiczny lokalizacji (np. Poznań = LOC_001).ext_tempFloatZewnętrzna temperatura otoczenia (w °C).ext_humInt / FloatWzględna wilgotność zewnętrzna (w %).timestampLongCzas pomiaru w formacie Epoch Milliseconds.silosArray[Object]Lista obiektów reprezentujących podłączone silosy.Struktura obiektu Silo:PoleTypOpisidStringUnikalny ID silosu (np. S_01_POZ). Powinien składać się z numeru urządzenia i portu.average_tempFloatWyliczona średnia temperatura z całej macierzy.matrix_dataArray[Array[Float]]Macierz odczytów. Każda wiersz to pojedyncza sonda sznurkowa, każda kolumna to poziom głębokości.Moduł Rejestracji Urządzeń (QR Skaner)Podczas dodawania nowego urządzenia za pomocą systemu wizyjnego (QR Code z fizycznej skrzynki urządzenia), generowany jest zminimalizowany ładunek (Payload) służący do wstrzyknięcia kluczy złożonych do bazy lokalnej SQLite przed pełną synchronizacją.Format danych z kodu QR (Hardware ID Tag)JSON{
+  "mcu_id": "MCU_PROD_123",
+  "active_ports": [1, 2, 3]
+}
+Opis logiki: Kod QR nie zawiera historii pomiarów (oszczędność pamięci na mikrokontrolerze). Moduł wizyjny odczytuje aktywne porty i skleja je z mcu_id, po czym aplikacja mobilna asynchronicznie dociąga historyczną tablicę matrix_data z serwera REST.
