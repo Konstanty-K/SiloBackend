@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import List, Optional
 
+'''Do testowania SiloMonitor v1.2, + Postman'''
 app = FastAPI(title="SiloMonitor REST API", version="0.1.3")
 
 # --- KONFIGURACJA CORS ---
@@ -41,7 +42,7 @@ class SiloStatus(BaseModel):
 
 class McuStatus(BaseModel):
     id: str  # Hardware ID (np. MAC adres)
-    location_id: str  # <--- NOWOŚĆ: Powiązanie z lokalizacją! Np. "LOC_001"
+    location_id: str
     ext_temp: float
     ext_hum: int
     timestamp: int
