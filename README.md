@@ -1,3 +1,7 @@
+# SiloBackend - REST API dla systemu SiloMonitor
+
+SiloBackend to serwerowa część systemu SiloMonitor, zapewniająca centralny punkt gromadzenia i udostępniania danych telemetrycznych z monitorowanych silosów zbożowych. [cite_start]Zbudowany w języku Python z wykorzystaniem frameworka FastAPI, serwer obsługuje asynchroniczną wymianę danych z aplikacją mobilną.
+
 ## 🚀 Architektura i Główne Cechy
 
 * **FastAPI:** Wysokowydajny framework do budowy API w języku Python, zapewniający asynchroniczność (AsyncIO) i automatyczne generowanie dokumentacji (Swagger UI).
